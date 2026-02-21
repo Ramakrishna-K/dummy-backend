@@ -37,24 +37,24 @@ app.use(express.json());
 app.use(cookieParser());
 
 // CORS config (for React frontend)
-app.use(
-  cors({
-    origin: "https://dummy-frontend-chi.vercel.app/",
-    credentials: true,
-  })
-);
-
-// const allowedOrigins = [
-//   "https://dummy-frontend-chi.vercel.app",
-//   "http://localhost:5173"
-// ];
-
 // app.use(
 //   cors({
-//     origin: allowedOrigins,
+//     origin: "https://dummy-frontend-chi.vercel.app/",
 //     credentials: true,
 //   })
 // );
+
+const allowedOrigins = [
+  "https://dummy-frontend-chi.vercel.app",
+  "http://localhost:5173"
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 // connect database
 connectDB();
