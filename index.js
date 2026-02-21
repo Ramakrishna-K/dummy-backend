@@ -37,10 +37,22 @@ app.use(express.json());
 app.use(cookieParser());
 
 // CORS config (for React frontend)
+// app.use(
+//   cors({
+//    [ origin: "https://dummy-frontend-chi.vercel.app/",
+//     http://localhost:5173/]
+//     credentials: true,
+//   })
+// );
+
+const allowedOrigins = [
+  "https://dummy-frontend-chi.vercel.app",
+  "http://localhost:5173"
+];
+
 app.use(
   cors({
-   [ origin: "https://dummy-frontend-chi.vercel.app/",
-    http://localhost:5173/]
+    origin: allowedOrigins,
     credentials: true,
   })
 );
