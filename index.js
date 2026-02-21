@@ -39,7 +39,8 @@ app.use(cookieParser());
 // CORS config (for React frontend)
 app.use(
   cors({
-    origin: "http://localhost:5173",
+   [ origin: "https://dummy-frontend-chi.vercel.app/",
+    http://localhost:5173/]
     credentials: true,
   })
 );
