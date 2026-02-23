@@ -59,28 +59,18 @@ import userRoutes from "./routes/User.routes.js";
 dotenv.config();
 
 const app = express();
-
-/* 🔥 REQUIRED for Render / reverse proxies */
 app.set("trust proxy", 1);
 
-/* ✅ Allowed Frontend Origins */
 const allowedOrigins = [
   "https://dummy-frontend-7qpg.vercel.app",
   "http://localhost:5173",
 ];
 
-/* ✅ CORS CONFIG */
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (Postman, mobile apps)
       if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      console.error("❌ Blocked by CORS:", origin);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
       callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
@@ -89,25 +79,17 @@ app.use(
   })
 );
 
-/* ✅ Handle Preflight Requests */
-app.options("*", cors());
-
-/* ✅ Body & Cookies */
 app.use(express.json());
 app.use(cookieParser());
 
-/* ✅ Health Check */
 app.get("/", (req, res) => {
-  res.status(200).send("API is running");
+  res.send("API is running");
 });
 
-/* ✅ Database */
 connectDB();
 
-/* ✅ Routes */
 app.use("/api/user", userRoutes);
 
-/* ✅ Server */
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
