@@ -59,7 +59,7 @@ import userRoutes from "./routes/User.routes.js";
 dotenv.config();
 
 const app = express();
-app.set("trust proxy", 1);
+// app.set("trust proxy", 1);
 
 const allowedOrigins = [
   "https://dummy-frontend-7qpg.vercel.app",
