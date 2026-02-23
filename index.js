@@ -25,7 +25,7 @@ app.use(cookieParser());
 // );
 
 const allowedOrigins = [
-  "https://dummy-frontend-chi.vercel.app",
+  "https://dummy-frontend-7qpg.vercel.app/",
   "http://localhost:5173"
 ];
 
