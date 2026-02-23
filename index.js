@@ -63,7 +63,7 @@ const app = express();
 /* ✅ CORS FIRST */
 const allowedOrigins = [
   "https://dummy-frontend-7qpg.vercel.app",
-  "http://localhost:5173",
+  "http://localhost:5173"
 ];
 
 app.use(
