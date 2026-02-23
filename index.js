@@ -68,15 +68,22 @@ const allowedOrigins = [
   "https://dummy-frontend-7qpg.vercel.app",
   "http://localhost:5173",
 ];
-
 app.use(
   cors({
     origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"], // ⭐ VERY IMPORTANT
-
+    credentials: true,
   })
 );
+
+
+// app.use(
+//   cors({
+//     origin: allowedOrigins,
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization"], // ⭐ VERY IMPORTANT
+
+//   })
+// );
 
 // connect database
 connectDB();
