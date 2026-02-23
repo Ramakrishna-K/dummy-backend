@@ -47,45 +47,41 @@
 // app.listen(PORT, () => {
 //   console.log(`Server running on port ${PORT}`);
 // });
+
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/User.routes.js";
 
 dotenv.config();
-
 const app = express();
 
-/* 🔥 CORS MUST COME FIRST */
 app.use(
   cors({
     origin: [
       "https://dummy-frontend-7qpg.vercel.app",
       "http://localhost:5173",
     ],
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
   })
 );
 
-/* body parser AFTER cors */
+// 👇 REQUIRED for preflight
+app.options("*", cors());
+
 app.use(express.json());
 
-/* 🔥 test route (VERY IMPORTANT) */
 app.get("/", (req, res) => {
   res.send("API is running");
 });
 
-/* connect DB */
 connectDB();
 
-/* routes */
 app.use("/api/user", userRoutes);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log("Server running on port", PORT));
+
