@@ -19,7 +19,7 @@ app.use(cookieParser());
 // CORS config (for React frontend)
 // app.use(
 //   cors({
-//     origin: "https://dummy-frontend-chi.vercel.app/",
+//     origin: "https://dummy-frontend-7qpg.vercel.app/",
 //     credentials: true,
 //   })
 // );
