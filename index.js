@@ -59,55 +59,40 @@ import userRoutes from "./routes/User.routes.js";
 dotenv.config();
 
 const app = express();
+app.set("trust proxy", 1); // 🔥 REQUIRED on Render
 
-/* ✅ CORS FIRST */
 const allowedOrigins = [
   "https://dummy-frontend-7qpg.vercel.app",
-  "http://localhost:5173"
+  "http://localhost:5173",
 ];
+
 app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        console.log("❌ Blocked by CORS:", origin);
         callback(new Error("Not allowed by CORS"));
       }
     },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
-// app.use(
-//   cors({
-//     origin: allowedOrigins,
-//     credentials: true,
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   })
-// );
 
-/* ✅ body & cookies AFTER cors */
+app.options("*", cors()); // 🔥 preflight fix
+
 app.use(express.json());
 app.use(cookieParser());
 
-/* ✅ health check */
 app.get("/", (req, res) => {
   res.send("API is running");
 });
 
-/* ✅ DB */
 connectDB();
 
-/* ✅ routes */
 app.use("/api/user", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-
-
