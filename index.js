@@ -1,24 +1,4 @@
-// import express from "express";
-// import cors from "cors";
-// import dotenv from "dotenv";
 
-// import connectDB from "./config/db.js";
-// dotenv.config(); // 🔥 MUST be before connectDB()
-
-// import authRoutes from './routes/User.routes.js'
-// const app = express();
-
-// app.use(cors());
-// app.use(express.json())
-// connectDB(); // connect to MongoDB
-
-
-// app.use("/api/user", authRoutes);
-
-// const PORT =  5000;
-// app.listen(PORT,()=>{
-//     console.log(`server is running here on port ${PORT}`)
-// })
 
 import express from "express";
 import cors from "cors";
